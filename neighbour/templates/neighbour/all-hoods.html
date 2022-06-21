@@ -1,0 +1,25 @@
+{% extends 'neighbour/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container my-5">
+        <!-- <a href="{% url 'new-hood' %}" class="btn btn-sm btn-info mb-2"> Add New</a> -->
+    <div class="row">
+        {% for hood in all_hoods %}
+        <div class="col-md-4">
+            <div class="card mb-4" style="min-height:340px">
+                <img src="{{ hood.hood_logo.url }}" class="card-img-top" alt="{{ hood.name }}" style="width: auto; height:20rem;">
+                <div class="card-body">
+                    <h6 class="card-title"> <b>{{ hood.name }}  ({{hood.location}}) </b> <span class="ml-4 text-primary">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></h6>
+                    <p class="card-text">{{hood.description}}</p>
+                    {% if request.user.profile.neighbourhood == hood %}
+                    <a href="{% url 'leave-hood' hood.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
+                    {% elif not request.user.profile.neighbourhood %}
+                    <a href="{% url 'join-hood' hood.id %}" class="btn btn-primary btn-sm">Join Hood</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
