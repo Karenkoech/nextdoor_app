@@ -1,0 +1,44 @@
+{% extends 'neighbour/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class='row col-xs-12 col-lg-10 mt-5 pl-sm-5 pr-sm-5 p-0' style="margin: 0 auto;">
+    <div class="phone-side-content d-none d-lg-inline col-5 ml-5 p-0 pl-2 mr-0">
+        <img src="/media/login2.jpg" alt="phone image" style="height:35rem;">
+    </div>
+    <div class='signup-content text-center col-xs-12 col-lg-5 m-md-0 ml-sm-5 m-xs-0'>
+        <div class='card p-4 pt-4'>
+            <p><img src="/media/login.jpeg" alt="logo" style="width:170px"></p>  
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">Login Again</a>
+                <input type="hidden" name="next" value="" href="{% url 'login' %}" />
+            </form>
+  
+            <p><img class='mb-2 mt-3'src="" style="width: 80%;"></p>
+           
+        </div>
+        
+    </div>
+  </div>
+    <!-- <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="content-section">
+                <h2>You Have Been Logged Out!</h2> <br/>
+            <form action="" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Sign in</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <a class="btn btn-outline-dark" type="submit" href="{% url 'login' %}" >Log in Again</a>
+                </div>
+            </form>  
+        </div> 
+    </div>
+</div>
+<div class="col-md-4"></div> -->
+{% endblock %}
