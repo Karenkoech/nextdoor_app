@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: nextdoor-app
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn nextdoor.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: nextdoor-app.onrender.com
+      - key: PYTHON_VERSION
+        value: 3.9.12
+
+databases:
+  - name: nextdoor-db
+    plan: free
